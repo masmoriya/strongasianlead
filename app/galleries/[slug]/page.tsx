@@ -43,13 +43,13 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     <>
       <section className="bg-ink text-white">
         <div className="page-shell grid min-h-[72vh] gap-10 py-16 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
-          <div>
+          <div className="fade-in">
             <Link href="/galleries" className="minimal-link text-sm text-white/70">Galleries</Link>
             <p className="mt-10 text-sm font-semibold text-gold">{gallery.date}</p>
             <h1 className="mt-4 text-5xl font-semibold leading-none sm:text-7xl">{gallery.title}</h1>
             <p className="mt-6 text-white/72">{gallery.description}</p>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-black">
+          <div className="surface relative aspect-[4/3] bg-black">
             <Image
               src={photoPath(gallery, gallery.cover)}
               alt={gallery.summary}
@@ -66,7 +66,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
           <p className="mb-8 text-sm font-semibold text-muted">{photos.length} photos</p>
           <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
             {photos.map((photo, index) => (
-              <div key={photo.src} className="mb-4 break-inside-avoid bg-soft">
+              <div key={photo.src} className="surface mb-4 break-inside-avoid bg-soft">
                 <Image
                   src={photo.src}
                   alt={photo.alt}

@@ -18,16 +18,16 @@ export default function PodcastPage() {
       />
       <section className="pb-20">
         <div className="page-shell grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-          <div className="space-y-4 text-sm font-semibold">
-            <a href={site.spotify} target="_blank" rel="noreferrer" className="minimal-link">Spotify</a>
-            <a href={site.anchor} target="_blank" rel="noreferrer" className="minimal-link">Anchor</a>
+          <div className="flex flex-wrap gap-3 text-sm font-semibold lg:block lg:space-y-3">
+            <a href={site.spotify} target="_blank" rel="noreferrer" className="minimal-link rounded-md bg-soft px-4 py-3 dark:bg-white/5">Spotify</a>
+            <a href={site.anchor} target="_blank" rel="noreferrer" className="minimal-link rounded-md bg-soft px-4 py-3 dark:bg-white/5">Anchor</a>
           </div>
           <iframe
             data-testid="embed-iframe"
             src="https://open.spotify.com/embed/show/5vgqPKbNlqlamSddt8vhLB/video?utm_source=generator"
             width="100%"
             height="351"
-            className="bg-soft"
+            className="surface bg-soft"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
             title="Strong Asian Lead podcast"

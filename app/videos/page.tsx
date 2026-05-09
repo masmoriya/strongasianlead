@@ -15,7 +15,7 @@ export default function VideosPage() {
     <>
       <PageIntro title="Videos" body="Interviews, community footage, legacy screening records, and the early platform demo." />
       <section className="pb-20">
-        <div className="page-shell grid gap-10 md:grid-cols-2">
+        <div className="page-shell stagger-children grid gap-10 md:grid-cols-2">
           {videos.map((video) => (
             <VideoEmbed key={video.src} video={video} />
           ))}

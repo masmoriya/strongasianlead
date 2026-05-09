@@ -15,7 +15,7 @@ export default function GalleriesPage() {
     <>
       <PageIntro title="Galleries" body="Screenings, panels, gatherings, and strike solidarity from the Strong Asian Lead archive." />
       <section className="pb-20">
-        <div className="page-shell grid gap-9 md:grid-cols-2 lg:grid-cols-3">
+        <div className="page-shell stagger-children grid gap-9 md:grid-cols-2 lg:grid-cols-3">
           {galleries.map((gallery, index) => (
             <GalleryCard key={gallery.slug} gallery={gallery} priority={index < 2} />
           ))}

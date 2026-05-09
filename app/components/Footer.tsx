@@ -8,6 +8,7 @@ import { legalLinks, logo, navItems, site } from '../lib/site';
 
 export function Footer() {
   const { openBanner } = useCookieConsent();
+  const footerLinks = navItems.filter((item) => !['/', '/events', '/galleries', '/videos', '/podcast'].includes(item.href));
 
   return (
     <footer className="bg-ink py-12 text-white dark:bg-[#0e0907]">
@@ -18,13 +19,13 @@ export function Footer() {
           </div>
           <p className="body-copy text-white/70">A community archive for the work, events, and conversations of Strong Asian Lead.</p>
         </div>
-        <div className="flex flex-wrap gap-4 text-sm font-medium text-white/75">
-          {navItems.filter((item) => item.href !== '/').map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-white">
+        <div className="flex flex-wrap gap-2 text-sm font-medium text-white/75">
+          {footerLinks.map((item) => (
+            <Link key={item.href} href={item.href} className="rounded-md px-3 py-2 transition hover:bg-white/10 hover:text-white">
               {item.label}
             </Link>
           ))}
-          <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:text-white">
+          <a href={site.instagram} target="_blank" rel="noreferrer" className="rounded-md px-3 py-2 transition hover:bg-white/10 hover:text-white">
             Instagram
           </a>
         </div>
@@ -36,7 +37,7 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
-          <button type="button" onClick={openBanner} className="hover:text-white">
+          <button type="button" onClick={openBanner} className="rounded-sm hover:text-white">
             Cookie preferences
           </button>
           <Link href="/directory" className="hover:text-white">

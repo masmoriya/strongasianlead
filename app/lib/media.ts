@@ -1,5 +1,4 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { galleryPhotoFiles, type GalleryPhotoSlug } from './gallery-photo-data';
 
 export type VideoItem = {
   title: string;
@@ -8,7 +7,7 @@ export type VideoItem = {
 };
 
 export type Gallery = {
-  slug: string;
+  slug: GalleryPhotoSlug;
   title: string;
   date: string;
   directory: string;
@@ -113,14 +112,8 @@ export function photoPath(gallery: Gallery, fileName: string) {
 }
 
 export async function getGalleryPhotos(gallery: Gallery) {
-  const dir = path.join(process.cwd(), 'public', 'Photos', gallery.directory);
-  const entries = await fs.readdir(dir);
-
-  return entries
-    .filter((entry) => /\.(jpe?g|png|webp|gif)$/i.test(entry))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((fileName) => ({
-      src: photoPath(gallery, fileName),
-      alt: `${gallery.title} photo`,
-    }));
+  return galleryPhotoFiles[gallery.slug].map((fileName) => ({
+    src: photoPath(gallery, fileName),
+    alt: `${gallery.title} photo`,
+  }));
 }

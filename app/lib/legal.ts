@@ -14,21 +14,31 @@ export type LegalPageData = {
 export const legalPages = {
   accessibility: {
     title: 'Accessibility Statement',
-    intro: 'Strong Asian Lead is committed to making this archive usable for everyone.',
+    intro: 'Strong Asian Lead is committed to making this archive usable by as many people as possible.',
     updated: 'Last updated May 9, 2026.',
     sections: [
       {
         title: 'Conformance status',
-        body: 'We aim to follow WCAG 2.1 AA guidance through semantic HTML, readable contrast, keyboard navigation, and clear page structure.',
+        body: 'We aim to conform to WCAG 2.1 level AA. The site is reviewed for semantic structure, keyboard access, readable contrast, responsive layouts, and clear focus states.',
       },
       {
-        title: 'Technical approach',
-        body: 'The site is built with Next.js, React, CSS, and WAI-ARIA where native HTML needs additional context.',
-        items: ['Semantic headings and landmarks.', 'Keyboard-accessible links, menus, and controls.', 'Alternative text for meaningful images.', 'Reduced layout chrome around readable copy.'],
+        title: 'Accessibility measures',
+        items: [
+          'Semantic headings, landmarks, and page titles.',
+          'Keyboard-accessible navigation, links, and privacy controls.',
+          'Visible focus styles and reduced-motion support.',
+          'Alternative text for meaningful images and empty alt text for decorative imagery.',
+          'Body copy that inherits the site font and avoids decorative treatments.',
+          'Responsive layouts that support zoom and small screens.',
+        ],
+      },
+      {
+        title: 'Known limits',
+        body: 'Some archived third-party embeds, external platforms, and older event media may have accessibility limits outside our direct control. We keep the surrounding page structure accessible and will provide reasonable alternatives when we can.',
       },
       {
         title: 'Feedback',
-        body: 'If you encounter a barrier, contact us and include the page URL, device, browser, and the issue you experienced.',
+        body: 'If you encounter a barrier, email support@strongasianlead.com with the page URL, device, browser, assistive technology if applicable, and the issue you experienced.',
       },
     ],
   },
@@ -39,11 +49,16 @@ export const legalPages = {
     sections: [
       {
         title: 'Information we collect',
-        items: ['Contact details you send directly by email or through linked platforms.', 'Optional analytics only if you opt in.', 'Essential local preferences for theme and cookie choices.'],
+        items: [
+          'Contact details you send directly by email or through linked platforms.',
+          'Optional analytics only if you opt in through the cookie banner.',
+          'Essential local preferences for theme and cookie choices.',
+          'Technical information needed to deliver pages securely, such as standard server logs.',
+        ],
       },
       {
         title: 'How we use it',
-        body: 'We use contact information to respond. We use optional analytics to understand which archive pages are useful. We do not sell personal information.',
+        body: 'We use contact information to respond, operate the archive, and handle rights, accessibility, or privacy requests. Optional analytics help us understand which archive pages are useful. We do not sell personal information.',
       },
       {
         title: 'Third parties',
@@ -51,7 +66,11 @@ export const legalPages = {
       },
       {
         title: 'Your control',
-        body: 'You can reset local cookie preferences from the footer or cookie policy page. For direct data requests, contact the team.',
+        body: 'You can update or reset local cookie preferences from the footer or cookie policy page. For direct privacy requests, email support@strongasianlead.com.',
+      },
+      {
+        title: 'Retention',
+        body: 'We keep direct messages only as long as needed to respond, maintain records, or comply with legal obligations. Local browser preferences stay on your device until you reset them.',
       },
     ],
   },
@@ -62,7 +81,7 @@ export const legalPages = {
     sections: [
       {
         title: 'Use of the site',
-        body: 'You may browse the archive for personal, educational, journalistic, and community reference purposes.',
+        body: 'You may browse the archive for personal, educational, journalistic, and community reference purposes. Do not interfere with the site, attempt unauthorized access, or misuse the archive.',
       },
       {
         title: 'Content ownership',
@@ -76,6 +95,14 @@ export const legalPages = {
         title: 'No professional advice',
         body: 'Archive content is informational and does not constitute legal, financial, employment, or production advice.',
       },
+      {
+        title: 'Changes',
+        body: 'We may update these terms as the archive changes. Continued use of the site after an update means you accept the revised terms.',
+      },
+      {
+        title: 'Contact',
+        body: 'Questions about these terms can be sent to support@strongasianlead.com.',
+      },
     ],
   },
   cookiePolicy: {
@@ -85,11 +112,11 @@ export const legalPages = {
     sections: [
       {
         title: 'Essential preferences',
-        body: 'Theme and privacy settings are stored locally so the site remembers your choices.',
+        body: 'Theme and privacy settings are stored locally so the site remembers your choices. These are required for the site to function and cannot be disabled from the banner.',
       },
       {
         title: 'Optional analytics',
-        body: 'Anonymous analytics stay off unless you opt in. They help us understand archive usage.',
+        body: 'Anonymous analytics stay off unless you opt in. They help us understand archive usage and should not be used to identify you.',
       },
       {
         title: 'Marketing pixels',
@@ -98,6 +125,10 @@ export const legalPages = {
       {
         title: 'Changing choices',
         body: 'Use the footer cookie preferences link or the controls on this page to update or reset your choices.',
+      },
+      {
+        title: 'Contact',
+        body: 'Questions about privacy controls can be sent to support@strongasianlead.com.',
       },
     ],
   },

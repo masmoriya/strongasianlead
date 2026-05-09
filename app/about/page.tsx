@@ -40,9 +40,9 @@ export default function AboutPage() {
         body="Strong Asian Lead is paused, but the archive remains for the people who were there and the storytellers who find it later."
       />
       <section className="pb-20">
-        <div className="page-shell grid gap-8 md:grid-cols-2">
+        <div className="page-shell stagger-children grid gap-8 md:grid-cols-2">
           {sections.map((section) => (
-            <article key={section.title} className="bg-soft p-8">
+            <article key={section.title} className="soft-card p-8">
               <h2 className="text-2xl font-semibold">{section.title}</h2>
               <p className="mt-4 text-muted">{section.body}</p>
             </article>

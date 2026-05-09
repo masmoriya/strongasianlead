@@ -19,10 +19,10 @@ export default function EventsPage() {
         body="The archive is organized around the rooms where people met: screenings, panels, parties, and moments of solidarity."
       />
       <section className="pb-20">
-        <div className="page-shell grid gap-10">
+        <div className="page-shell stagger-children grid gap-10">
           {galleries.map((event, index) => (
-            <article key={event.slug} className="grid gap-6 border-t border-black/10 pt-8 dark:border-white/10 md:grid-cols-[260px_1fr_auto] md:items-center">
-              <div className="relative aspect-[4/3] overflow-hidden bg-soft">
+            <article key={event.slug} className="soft-card grid gap-6 p-4 md:grid-cols-[260px_1fr_auto] md:items-center md:p-5">
+              <div className="surface relative aspect-[4/3] bg-soft">
                 <Image
                   src={photoPath(event, event.cover)}
                   alt={event.summary}
@@ -37,7 +37,7 @@ export default function EventsPage() {
                 <h2 className="mt-1 text-2xl font-semibold">{event.title}</h2>
                 <p className="mt-3 max-w-2xl text-sm text-muted dark:text-white/68">{event.description}</p>
               </div>
-              <Link href={`/galleries/${event.slug}`} className="minimal-link text-sm">
+              <Link href={`/galleries/${event.slug}`} className="minimal-link rounded-md px-1 py-2 text-sm">
                 View photos
               </Link>
             </article>

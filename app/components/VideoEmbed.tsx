@@ -3,7 +3,7 @@ import type { VideoItem } from '../lib/media';
 export function VideoEmbed({ video }: { video: VideoItem }) {
   return (
     <article>
-      <div className="aspect-video overflow-hidden bg-black">
+      <div className="surface aspect-video bg-black">
         <iframe
           src={video.src}
           title={video.title}
@@ -13,7 +13,7 @@ export function VideoEmbed({ video }: { video: VideoItem }) {
           loading="lazy"
         />
       </div>
-      <div className="mt-4">
+      <div className="mt-4 px-1">
         <h2 className="text-xl font-semibold">{video.title}</h2>
         <p className="mt-2 text-sm text-muted">{video.description}</p>
       </div>

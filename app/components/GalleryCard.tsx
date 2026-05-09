@@ -6,7 +6,7 @@ import { photoPath } from '../lib/media';
 export function GalleryCard({ gallery, priority = false }: { gallery: Gallery; priority?: boolean }) {
   return (
     <Link href={`/galleries/${gallery.slug}`} className="group block">
-      <div className="relative aspect-[4/3] overflow-hidden bg-soft">
+      <div className="surface relative aspect-[4/3] bg-soft">
         <Image
           src={photoPath(gallery, gallery.cover)}
           alt={gallery.summary}
@@ -16,7 +16,7 @@ export function GalleryCard({ gallery, priority = false }: { gallery: Gallery; p
           priority={priority}
         />
       </div>
-      <div className="mt-4">
+      <div className="mt-4 px-1">
         <p className="text-sm text-muted">{gallery.date}</p>
         <h2 className="mt-1 text-xl font-semibold">{gallery.title}</h2>
         <p className="mt-2 text-sm text-muted">{gallery.summary}</p>

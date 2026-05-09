@@ -1,7 +1,7 @@
 export const site = {
   name: 'Strong Asian Lead',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://strongasianlead.com',
-  email: 'hello@filmclusive.com',
+  email: 'support@strongasianlead.com',
   description:
     'Strong Asian Lead preserved space for Asian American, Native Hawaiian, and Pacific Islander storytellers through screenings, conversations, community events, and a creative directory that evolved into Filmclusive.',
   instagram: 'https://instagram.com/strongasianlead_',

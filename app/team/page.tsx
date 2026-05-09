@@ -16,10 +16,10 @@ export default function TeamPage() {
     <>
       <PageIntro title="Team" body="Strong Asian Lead was built by a small founding team and carried by a much larger community." />
       <section className="pb-20">
-        <div className="page-shell grid gap-8 md:grid-cols-2">
+        <div className="page-shell stagger-children grid gap-8 md:grid-cols-2">
           {teamMembers.map((member) => (
-            <Link key={member.slug} href={`/team/${member.slug}`} className="group grid gap-5 bg-soft p-5 dark:bg-white/5 sm:grid-cols-[150px_1fr]">
-              <div className="relative aspect-[3/4] overflow-hidden bg-paper dark:bg-[#120d0a]">
+            <Link key={member.slug} href={`/team/${member.slug}`} className="soft-card group grid gap-5 p-5 transition hover:-translate-y-0.5 sm:grid-cols-[150px_1fr]">
+              <div className="surface relative aspect-[3/4] bg-paper dark:bg-[#120d0a]">
                 <Image src={member.image} alt={member.imageAlt} fill sizes="150px" className="object-cover" />
               </div>
               <div>
