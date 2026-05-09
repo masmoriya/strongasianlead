@@ -3,12 +3,15 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { getStoredConsent, setConsent, type CookieConsent } from '../utils/cookie-consent';
 
+type ConsentCategory = 'analytics' | 'marketing' | 'location' | 'essential';
+
 type ConsentContext = {
   preferences: CookieConsent | null;
-  showBanner: boolean;
   acceptAll: () => void;
   rejectNonEssential: () => void;
   updatePreferences: (update: Partial<CookieConsent>) => void;
+  hasConsented: (category: ConsentCategory) => boolean;
+  showBanner: boolean;
   openBanner: () => void;
   closeBanner: () => void;
 };
@@ -16,43 +19,84 @@ type ConsentContext = {
 const Context = createContext<ConsentContext | null>(null);
 
 export function CookieConsentProvider({ children }: { children: React.ReactNode }) {
-  const [preferences, setPreferences] = useState<CookieConsent | null>(() => getStoredConsent());
-  const [bannerOverride, setBannerOverride] = useState<'auto' | 'open' | 'closed'>('auto');
+  const [preferences, setPreferences] = useState<CookieConsent | null>(null);
+  const [isBannerVisible, setIsBannerVisible] = useState(false);
 
   useEffect(() => {
     const onChange = (event: Event) => {
-      setPreferences((event as CustomEvent<CookieConsent | null>).detail);
+      const next = (event as CustomEvent<CookieConsent | null>).detail;
+      setPreferences(next);
+      if (next === null) setIsBannerVisible(true);
     };
 
-    window.addEventListener('sal-cookie-consent-changed', onChange);
-    return () => window.removeEventListener('sal-cookie-consent-changed', onChange);
+    window.addEventListener('cookie-consent-changed', onChange);
+
+    const syncStoredPreference = window.setTimeout(() => {
+      const stored = getStoredConsent();
+      setPreferences(stored);
+      setIsBannerVisible(stored === null);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(syncStoredPreference);
+      window.removeEventListener('cookie-consent-changed', onChange);
+    };
+  }, []);
+
+  const closeBanner = useCallback(() => {
+    setIsBannerVisible(false);
   }, []);
 
   const acceptAll = useCallback(() => {
-    setPreferences(setConsent({ analytics: true, marketing: true }));
-    setBannerOverride('closed');
-  }, []);
+    setPreferences(setConsent({ analytics: true, marketing: true, location: true }));
+    closeBanner();
+  }, [closeBanner]);
 
   const rejectNonEssential = useCallback(() => {
-    setPreferences(setConsent({ analytics: false, marketing: false }));
-    setBannerOverride('closed');
-  }, []);
+    setPreferences(setConsent({ analytics: false, marketing: false, location: false }));
+    closeBanner();
+  }, [closeBanner]);
 
   const updatePreferences = useCallback((update: Partial<CookieConsent>) => {
     setPreferences(setConsent(update));
   }, []);
 
+  const hasConsented = useCallback(
+    (category: ConsentCategory) => {
+      if (category === 'essential') return true;
+      if (category === 'analytics') return preferences?.analytics ?? false;
+      if (category === 'marketing') return preferences?.marketing ?? false;
+      if (category === 'location') return preferences?.location ?? false;
+      return false;
+    },
+    [preferences],
+  );
+
+  const openBanner = useCallback(() => {
+    setIsBannerVisible(true);
+  }, []);
+
   const value = useMemo(
     () => ({
       preferences,
-      showBanner: bannerOverride === 'open' || (bannerOverride === 'auto' && preferences === null),
       acceptAll,
       rejectNonEssential,
       updatePreferences,
-      openBanner: () => setBannerOverride('open'),
-      closeBanner: () => setBannerOverride('closed'),
+      hasConsented,
+      showBanner: isBannerVisible,
+      openBanner,
+      closeBanner,
     }),
-    [preferences, bannerOverride, acceptAll, rejectNonEssential, updatePreferences],
+    [
+      preferences,
+      acceptAll,
+      rejectNonEssential,
+      updatePreferences,
+      hasConsented,
+      isBannerVisible,
+      openBanner,
+      closeBanner,
+    ],
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

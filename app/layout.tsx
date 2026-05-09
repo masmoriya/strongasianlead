@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
+import { ConsentScripts } from './components/ConsentScripts';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { Footer } from './components/Footer';
 import { Nav } from './components/Nav';
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="font-sans antialiased">
         <CookieConsentProvider>
+          <ConsentScripts />
           <Nav />
           <main>{children}</main>
           <Footer />
