@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import { PageIntro } from '../components/PageIntro';
+import { PodcastPlayer } from '../components/PodcastPlayer';
 import { createPageMetadata } from '../lib/metadata';
-import { site } from '../lib/site';
+import { getPodcastFeed } from '../lib/podcast';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Podcast',
@@ -9,31 +11,15 @@ export const metadata: Metadata = createPageMetadata({
   description: 'The Strong Asian Lead podcast archive.',
 });
 
-export default function PodcastPage() {
+export default async function PodcastPage() {
+  const feed = await getPodcastFeed();
+
   return (
-    <>
-      <PageIntro
-        title="Podcast"
-        body="Conversations with filmmakers, industry professionals, organizers, and community leaders."
-      />
-      <section className="pb-20">
-        <div className="page-shell grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-          <div className="flex flex-wrap gap-3 text-sm font-semibold lg:block lg:space-y-3">
-            <a href={site.spotify} target="_blank" rel="noreferrer" className="minimal-link rounded-md bg-soft px-4 py-3 dark:bg-white/5">Spotify</a>
-            <a href={site.anchor} target="_blank" rel="noreferrer" className="minimal-link rounded-md bg-soft px-4 py-3 dark:bg-white/5">Anchor</a>
-          </div>
-          <iframe
-            data-testid="embed-iframe"
-            src="https://open.spotify.com/embed/show/5vgqPKbNlqlamSddt8vhLB/video?utm_source=generator"
-            width="100%"
-            height="351"
-            className="surface bg-soft"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            title="Strong Asian Lead podcast"
-          />
-        </div>
-      </section>
-    </>
+    <section className="py-6 sm:py-10">
+      <div className="page-shell">
+        <h1 className="sr-only">{feed.title}</h1>
+        <PodcastPlayer episodes={feed.episodes} />
+      </div>
+    </section>
   );
 }
